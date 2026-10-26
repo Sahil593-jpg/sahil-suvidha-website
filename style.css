@@ -1,0 +1,931 @@
+/* =========================
+   BASIC
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 30px 20px 90px;
+    background: #f5fbf7;
+    color: #123;
+    text-align: center;
+}
+
+
+/* =========================
+   HEADINGS
+========================= */
+
+h1 {
+    color: #0b5ed7;
+}
+
+h2 {
+    color: #198754;
+    font-size: 20px;
+}
+
+h3 {
+    color: #123;
+}
+
+p {
+    line-height: 1.5;
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+button {
+    display: block;
+    width: 90%;
+    max-width: 400px;
+    margin: 12px auto;
+    padding: 16px;
+    border: none;
+    border-radius: 14px;
+    background: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-size: 17px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #eaf7ef;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   INPUT
+========================= */
+
+input {
+    width: 90%;
+    max-width: 400px;
+    padding: 15px;
+    margin: 10px auto 20px;
+    display: block;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    font-size: 16px;
+    box-sizing: border-box;
+    outline: none;
+    background: white;
+}
+
+input:focus {
+    border-color: #0b5ed7;
+    box-shadow: 0 0 8px rgba(11, 94, 215, 0.15);
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 500px;
+    margin: 0 auto 10px;
+    text-align: left;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header p {
+    margin: 5px 0 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.profile {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    font-size: 22px;
+}
+
+
+/* =========================
+   HOME SERVICES
+========================= */
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.card {
+    background: white;
+    padding: 18px 10px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card span {
+    font-size: 32px;
+}
+
+.card h3 {
+    margin: 10px 0 5px;
+    font-size: 16px;
+}
+
+.card p {
+    margin: 0;
+    font-size: 12px;
+    color: #777;
+    line-height: 1.4;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
+}
+
+
+/* =========================
+   FESTIVAL BANNER
+========================= */
+
+.festival-banner {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #0b5ed7, #198754);
+    color: white;
+    text-align: left;
+}
+
+.festival-banner h2 {
+    margin: 0 0 8px;
+    color: white;
+}
+
+.festival-banner p {
+    margin: 0 0 15px;
+}
+
+.festival-banner button {
+    width: auto;
+    margin: 0;
+    padding: 10px 18px;
+    background: white;
+    color: #0b5ed7;
+    font-weight: bold;
+}
+
+
+/* =========================
+   SHOP SECTION
+========================= */
+
+.shop-section {
+    display: none;
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+}
+
+.shop-item {
+    background: white;
+    padding: 22px 10px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.shop-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
+}
+
+.shop-item h3 {
+    font-size: 15px;
+    margin: 8px 0 0;
+}
+
+
+/* =========================
+   VEGETABLE SECTION
+========================= */
+
+.vegetable-section {
+    display: none;
+    max-width: 500px;
+    margin: 20px auto;
+    text-align: center;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin: 20px 0;
+}
+
+.product {
+    background: white;
+    padding: 18px 10px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: 0.2s;
+}
+
+.product:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
+}
+
+.product-icon {
+    font-size: 32px;
+}
+
+.product h3 {
+    font-size: 15px;
+    margin: 8px 0;
+}
+
+.product button {
+    width: auto;
+    padding: 9px 14px;
+    margin: 5px auto;
+    font-size: 14px;
+}
+
+.product input {
+    width: 90%;
+    margin: 8px auto;
+    padding: 10px;
+    font-size: 13px;
+}
+
+
+/* =========================
+   CART
+========================= */
+
+.cart-bar {
+    max-width: 500px;
+    margin: 10px auto;
+    padding: 15px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    font-weight: bold;
+    color: #0b5ed7;
+}
+
+.cart-list {
+    max-width: 500px;
+    margin: 10px auto 20px;
+}
+
+.cart-item {
+    background: white;
+    padding: 12px 15px;
+    margin: 8px 0;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+    text-align: left;
+}
+
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 500px;
+    margin: auto;
+    background: white;
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 5px;
+    box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 18px 18px 0 0;
+    z-index: 1000;
+}
+
+.nav-item {
+    text-align: center;
+    font-size: 20px;
+    color: #777;
+    cursor: pointer;
+}
+
+.nav-item span {
+    display: block;
+    font-size: 11px;
+    margin-top: 3px;
+}
+
+.nav-item.active {
+    color: #0b5ed7;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 480px) {
+
+    body {
+        padding: 20px 12px 90px;
+    }
+
+    .services,
+    .shop-grid,
+    .product-grid {
+        gap: 10px;
+    }
+
+    .card {
+        padding: 15px 8px;
+    }
+
+    .card span {
+        font-size: 28px;
+    }
+
+    .product {
+        padding: 15px 8px;
+    }
+
+    .shop-item {
+        padding: 18px 8px;
+    }
+}/* =========================
+   CART QUANTITY CONTROLS
+========================= */
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.quantity-controls button {
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    margin: 0;
+    border-radius: 10px;
+    background: #eaf7ef;
+    color: #198754;
+    font-size: 20px;
+    box-shadow: none;
+}
+
+.quantity-controls button:hover {
+    background: #d1e7dd;
+}
+
+.quantity-controls span {
+    min-width: 25px;
+    font-size: 16px;
+    font-weight: bold;
+}.orders-section {
+    max-width: 500px;
+    margin: 20px auto 90px;
+    text-align: center;
+}
+
+.order-card {
+    background: white;
+    margin: 15px 0;
+    padding: 18px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: left;
+}
+
+.order-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.order-status {
+    background: #fff3cd;
+    color: #856404;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.order-card hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 12px 0;
+}
+
+.order-card p {
+    font-size: 14px;
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.order-item {
+    background: #f5fbf7;
+    padding: 9px 12px;
+    margin: 6px 0;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.empty-orders {
+    background: white;
+    padding: 30px 15px;
+    border-radius: 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}/* =========================================
+   ORDER STATUS COLORS
+   ========================================= */
+
+.order-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+
+/* 🟡 Pending */
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+
+/* 🔵 Confirmed */
+
+.status-confirmed {
+    background: #dbeafe;
+    color: #1d4ed8;
+}
+
+
+/* 🟠 Processing */
+
+.status-processing {
+    background: #ffedd5;
+    color: #c2410c;
+}
+
+
+/* 🟢 Delivered */
+
+.status-delivered {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+/* 🔴 Cancelled */
+
+.status-cancelled {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+
+/* 📱 Mobile */
+
+@media (max-width: 600px) {
+
+    .order-status {
+        padding: 5px 9px;
+        font-size: 11px;
+    }
+
+}/* =========================================
+   HIDE INNER SECTIONS BY DEFAULT
+   JavaScript इन्हें जरूरत पर दिखाएगा
+========================================= */
+
+#shop-section,
+#vegetable-section,
+#order-section,
+#success-section,
+#orders-section {
+    display: none;
+}/* =========================================
+   SAHIL SUVIDHA - MOBILE FRIENDLY DESIGN
+========================================= */
+
+body {
+    background: #f5f7fb;
+    color: #17202a;
+    font-family: Arial, "Noto Sans Devanagari", sans-serif;
+    margin: 0;
+    padding-bottom: 90px;
+}
+
+/* Main content */
+#home-section,
+#shop-section,
+#vegetable-section,
+#order-section,
+#success-section,
+#orders-section {
+    max-width: 700px;
+    margin: auto;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+/* Headings */
+h1 {
+    color: #126b45;
+    font-size: 32px;
+}
+
+h2 {
+    color: #123c69;
+    font-size: 25px;
+}
+
+h3 {
+    color: #222;
+}
+
+/* Search box */
+input,
+textarea,
+select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    margin: 7px 0;
+    border: 1px solid #d0d7de;
+    border-radius: 12px;
+    font-size: 16px;
+    background: white;
+}
+
+/* Buttons */
+button {
+    border: none;
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin: 6px 4px 6px 0;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    background: #126b45;
+    color: white;
+}
+
+button:active {
+    transform: scale(0.97);
+}
+
+/* Cards */
+.card,
+.service-card,
+.product-card,
+.category-card,
+.order-card {
+    background: white;
+    border-radius: 18px;
+    padding: 16px;
+    margin: 12px 0;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+/* Product buttons */
+.product-card button,
+.category-card button {
+    background: #126b45;
+}
+
+/* Cart */
+.cart-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.07);
+}
+
+/* Order status */
+.order-status {
+    display: inline-block;
+    background: #fff3cd;
+    color: #856404;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    #home-section,
+    #shop-section,
+    #vegetable-section,
+    #order-section,
+    #success-section,
+    #orders-section {
+        width: 100%;
+        padding: 14px;
+    }
+
+    h1 {
+        font-size: 29px;
+    }
+
+    h2 {
+        font-size: 23px;
+    }
+
+    h3 {
+        font-size: 20px;
+    }
+
+    button {
+        width: auto;
+        min-height: 44px;
+    }
+
+    .card,
+    .service-card,
+    .product-card,
+    .category-card,
+    .order-card {
+        border-radius: 16px;
+        padding: 14px;
+    }
+}/* =========================================
+   SAHIL SUVIDHA - HOME ACTION CARDS
+========================================= */
+
+/* Main action cards container */
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 18px;
+}
+
+/* Individual action card */
+.action-card {
+    background: white;
+    border-radius: 18px;
+    padding: 18px 12px;
+    text-align: center;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eef1f4;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* Icon */
+.action-card .action-icon {
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+/* Title */
+.action-card .action-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #17202a;
+}
+
+/* Small description */
+.action-card .action-text {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 5px;
+    line-height: 1.4;
+}
+
+/* Click effect */
+.action-card:active {
+    transform: scale(0.96);
+}
+
+/* Different card colors */
+
+.action-card.shop {
+    border-top: 4px solid #16a34a;
+}
+
+.action-card.service {
+    border-top: 4px solid #2563eb;
+}
+
+.action-card.need {
+    border-top: 4px solid #9333ea;
+}
+
+.action-card.urgent {
+    border-top: 4px solid #dc2626;
+}
+
+.action-card.festival {
+    border-top: 4px solid #f59e0b;
+}
+
+.action-card.suggestion {
+    border-top: 4px solid #0891b2;
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .action-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+
+    .action-card {
+        min-height: 125px;
+        padding: 16px 9px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .action-card .action-icon {
+        font-size: 32px;
+    }
+
+    .action-card .action-title {
+        font-size: 15px;
+    }
+
+    .action-card .action-text {
+        font-size: 11px;
+    }
+
+}/* =====================================================
+   CART BAR — ALWAYS VISIBLE
+===================================================== */
+
+.cart-bar {
+    display: block !important;
+    width: 100%;
+    box-sizing: border-box;
+    background: #ffffff;
+    color: #17202a;
+    padding: 14px 16px;
+    margin: 12px 0;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.8;
+}
+
+#cart-count {
+    color: #126b45;
+    font-weight: 700;
+}
+
+#cart-weight {
+    color: #123c69;
+    font-weight: 700;
+}/* ================================
+   MOBILE FIRST - PAN FORM
+================================ */
+
+#pan-request-section {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+#pan-request-section h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+#pan-request-section p {
+    font-size: 15px;
+    margin-bottom: 18px;
+}
+
+#pan-request-section .form-card {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#pan-request-section label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    margin: 14px 0 6px;
+}
+
+#pan-request-section input,
+#pan-request-section textarea,
+#pan-request-section select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background: #fff;
+}
+
+#pan-request-section textarea {
+    resize: vertical;
+}
+
+#pan-request-section button {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 14px;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* छोटे मोबाइल फोन */
+@media (max-width: 480px) {
+
+    #pan-request-section {
+        padding: 12px;
+    }
+
+    #pan-request-section h2 {
+        font-size: 22px;
+    }
+
+    #pan-request-section input,
+    #pan-request-section textarea,
+    #pan-request-section select {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    #pan-request-section button {
+        font-size: 16px;
+    }
+}

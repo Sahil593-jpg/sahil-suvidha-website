@@ -1,0 +1,3226 @@
+<!DOCTYPE html>
+<html lang="hi">
+<!-- Supabase Connection -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+    const SUPABASE_URL = "https://oxofwiyfjzhkvdpnimfq.supabase.co"
+    const SUPABASE_KEY = "sb_publishable_F2NzJPl9-giLB-Az3AlUYA_ybQGOkPm"
+
+    const supabaseClient = supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
+</script>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sahil Suvidha</title>
+
+    <link rel="stylesheet" href="style.css">
+<style>
+
+/* =========================================
+   ORDER STATUS COLORS
+   ========================================= */
+
+.order-status {
+    display: inline-block !important;
+    padding: 6px 12px !important;
+    border-radius: 20px !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+}
+
+
+/* 🟡 Pending */
+
+.status-pending {
+    background: #fff3cd !important;
+    color: #856404 !important;
+}
+
+
+/* 🔵 Confirmed */
+
+.status-confirmed {
+    background: #dbeafe !important;
+    color: #1d4ed8 !important;
+}
+
+
+/* 🟠 Processing */
+
+.status-processing {
+    background: #ffedd5 !important;
+    color: #c2410c !important;
+}
+
+
+/* 🟢 Delivered */
+
+.status-delivered {
+    background: #dcfce7 !important;
+    color: #15803d !important;
+}
+
+
+/* 🔴 Cancelled */
+
+.status-cancelled {
+    background: #fee2e2 !important;
+    color: #dc2626 !important;
+}
+
+
+/* 📱 Mobile */
+
+@media (max-width: 600px) {
+
+    .order-status {
+        padding: 5px 10px !important;
+        font-size: 12px !important;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<div class="header">
+
+    <div>
+
+        <h1>🏡 Sahil Suvidha</h1>
+
+        <p>📍 आपका गाँव</p>
+
+    </div>
+
+
+    <div class="profile">
+
+        👤
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     HOME SECTION
+===================================================== -->
+
+<div id="home-section">
+
+    <h2>
+        सामान हो या सेवा, सब एक जगह।
+    </h2>
+
+
+    <input
+        type="text"
+        placeholder="🔎 आपको क्या चाहिए?"
+    >
+
+
+
+    <!-- FESTIVAL BANNER -->
+
+    <div class="festival-banner">
+
+        <div>
+
+            <h2>
+                🎉 Festival Booking
+            </h2>
+
+            <p>
+                त्योहार का सामान पहले बुक करें
+            </p>
+
+            <button>
+                अभी बुक करें →
+            </button>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- SERVICES -->
+
+    <div class="services">
+
+
+        <!-- SHOPPING -->
+
+        <div
+            class="card"
+            onclick="openShop()"
+        >
+
+            <span>
+                🛒
+            </span>
+
+            <h3>
+                सामान मंगाएँ
+            </h3>
+
+            <p>
+                बाजार से सामान घर तक
+            </p>
+
+        </div>
+
+
+
+        <!-- SERVICE -->
+
+<div class="card" onclick="openService()" style="cursor:pointer;">
+
+    <span>
+        🔧
+    </span>
+
+    <h3>
+        Service चाहिए
+    </h3>
+
+    <p>
+        स्थानीय काम और ऑनलाइन सेवाएँ
+    </p>
+
+</div>
+
+
+        <!-- =====================================================
+     REQUIREMENT
+===================================================== -->
+
+<div
+    class="card"
+    onclick="openNeed()"
+    style="cursor:pointer;"
+>
+
+    <span>
+        📦
+    </span>
+
+    <h3>
+        अपनी जरूरत बताएं
+    </h3>
+
+    <p>
+        जो चाहिए, हमें बताइए
+    </p>
+
+</div>
+
+
+
+<!-- =====================================================
+     URGENT ORDER
+===================================================== -->
+
+<div
+    class="card"
+    onclick="openUrgent()"
+    style="cursor:pointer;"
+>
+
+    <span>
+        ⚡
+    </span>
+
+    <h3>
+        Urgent Order
+    </h3>
+
+    <p>
+        जरूरी सामान जल्दी मंगाएँ
+    </p>
+
+</div>
+
+
+
+<!-- =====================================================
+     FESTIVAL BOOKING
+===================================================== -->
+
+<div
+    class="card"
+    onclick="openFestival()"
+    style="cursor:pointer;"
+>
+
+    <span>
+        🎉
+    </span>
+
+    <h3>
+        Festival Booking
+    </h3>
+
+    <p>
+        त्योहार का सामान पहले बुक करें
+    </p>
+
+</div>
+
+
+
+<!-- =====================================================
+     SUGGESTION
+===================================================== -->
+
+<div
+    class="card"
+    onclick="openSuggestion()"
+    style="cursor:pointer;"
+>
+
+    <span>
+        💡
+    </span>
+
+    <h3>
+        सुझाव दें
+    </h3>
+
+    <p>
+        गाँव में क्या चाहिए बताइए
+    </p>
+
+</div>
+
+
+    </div>
+
+</div>
+<!-- =====================================================
+     SERVICE SECTION
+===================================================== -->
+
+<div
+    id="service-section"
+    class="service-section"
+    style="display:none;"
+>
+
+    <h2>
+        🔧 Service चाहिए
+    </h2>
+
+    <p>
+        स्थानीय और ऑनलाइन सेवाओं के लिए request भेजें।
+    </p>
+
+
+    <!-- PAN CARD -->
+
+    <div class="card">
+
+        <span>🪪</span>
+
+        <h3>
+            PAN Card बनवाएँ
+        </h3>
+
+        <p>
+            नया PAN Card या PAN से जुड़ी ऑनलाइन सहायता
+        </p>
+
+        <button
+            type="button"
+            onclick="selectService('PAN Card बनवाना')"
+        >
+            🪪 PAN Card
+        </button>
+
+    </div>
+
+
+    <!-- ELECTRICIAN -->
+
+    <div class="card">
+
+        <span>⚡</span>
+
+        <h3>
+            Electrician
+        </h3>
+
+        <p>
+            बिजली से जुड़ा काम
+        </p>
+
+        <button
+            type="button"
+            onclick="selectService('Electrician')"
+        >
+            🔧 Service लें
+        </button>
+
+    </div>
+
+
+    <!-- PLUMBER -->
+
+    <div class="card">
+
+        <span>🚰</span>
+
+        <h3>
+            Plumber
+        </h3>
+
+        <p>
+            पानी और पाइप से जुड़ा काम
+        </p>
+
+        <button
+            type="button"
+            onclick="selectService('Plumber')"
+        >
+            🚰 Service लें
+        </button>
+
+    </div>
+
+
+    <!-- MOBILE / COMPUTER -->
+
+    <div class="card">
+
+        <span>📱</span>
+
+        <h3>
+            Mobile / Computer Help
+        </h3>
+
+        <p>
+            मोबाइल, कंप्यूटर और ऑनलाइन काम में सहायता
+        </p>
+
+        <button
+            type="button"
+            onclick="selectService('Mobile / Computer Help')"
+        >
+            📱 Service लें
+        </button>
+
+    </div>
+
+
+    <!-- PRINT / SCAN -->
+
+    <div class="card">
+
+        <span>🖨️</span>
+
+        <h3>
+            Print / Scan / Document
+        </h3>
+
+        <p>
+            प्रिंट, स्कैन और document से जुड़ी सहायता
+        </p>
+
+        <button
+            type="button"
+            onclick="selectService('Print / Scan / Document')"
+        >
+            🖨️ Service लें
+        </button>
+
+    </div>
+
+
+    <!-- PHOTO / VIDEO -->
+
+    <div class="card">
+
+        <span>📸</span>
+
+        <h3>
+            Photo / Video
+        </h3>
+
+        <p>
+            फोटो और वीडियो से जुड़ी सेवा
+        </p>
+
+        <button
+            type="button"
+            onclick="selectService('Photo / Video')"
+        >
+            📸 Service लें
+        </button>
+
+    </div>
+
+
+    <!-- POSTER / INVITATION -->
+
+    <div class="card">
+
+        <span>🎨</span>
+
+        <h3>
+            Poster / Invitation
+        </h3>
+
+        <p>
+            Poster, invitation और digital design
+        </p>
+
+        <button
+            type="button"
+            onclick="selectService('Poster / Invitation')"
+        >
+            🎨 Service लें
+        </button>
+
+    </div>
+
+
+    <!-- OTHER SERVICE -->
+
+    <div class="card">
+
+        <span>🛠️</span>
+
+        <h3>
+            अन्य Service
+        </h3>
+
+        <p>
+            आपकी जरूरत की दूसरी कोई सेवा
+        </p>
+
+        <button
+            type="button"
+            onclick="selectService('अन्य Service')"
+        >
+            🛠️ Request करें
+        </button>
+
+    </div>
+
+
+    <button
+        type="button"
+        onclick="closeService()"
+    >
+        ← वापस Home
+    </button>
+
+</div>
+<button
+    type="button"
+    onclick="closeService()"
+>
+    ← वापस Home
+</button>
+
+</div>
+<!-- =====================================================
+     COMMON SERVICE REQUEST FORM
+===================================================== -->
+
+<!-- =====================================================
+     COMMON SERVICE REQUEST FORM
+===================================================== -->
+
+<div
+    id="service-request-section"
+    class="service-section"
+    style="display:none;"
+>
+
+    <h2 id="service-request-title">
+        🔧 Service Request
+    </h2>
+
+    <p>
+        नीचे अपनी जानकारी भरकर Request भेजें।
+    </p>
+
+    <div class="form-card">
+
+        <label>👤 पूरा नाम</label>
+
+        <input
+            type="text"
+            id="service-customer-name"
+            placeholder="अपना पूरा नाम लिखें"
+        >
+
+        <label>📱 मोबाइल नंबर</label>
+
+        <input
+            type="tel"
+            id="service-customer-phone"
+            placeholder="10 अंकों का मोबाइल नंबर"
+            maxlength="10"
+        >
+
+        <label>🏠 पूरा पता</label>
+
+        <textarea
+            id="service-customer-address"
+            placeholder="गाँव, पोस्ट, थाना, जिला आदि पूरा पता"
+            rows="4"
+        ></textarea>
+
+        <label>🛠️ Service / काम</label>
+
+        <input
+            type="text"
+            id="service-request-type"
+            readonly
+        >
+
+        <label>📝 अपनी जरूरत बताएं</label>
+
+        <textarea
+            id="service-customer-note"
+            placeholder="आपको किस काम की जरूरत है?"
+            rows="4"
+        ></textarea>
+
+        <button
+            type="button"
+            onclick="submitServiceRequest()"
+        >
+            📤 Request भेजें
+        </button>
+
+        <button
+            type="button"
+            onclick="checkServiceStatus()"
+        >
+            🔎 Request Status देखें
+        </button>
+
+        <button
+            type="button"
+            onclick="closeServiceRequest()"
+        >
+            ← वापस Services
+        </button>
+
+    </div>
+
+</div>
+
+<!-- =====================================================
+     PAN CARD REQUEST FORM
+===================================================== -->
+
+<section id="pan-request-section" style="display:none;">
+
+    <h2>🪪 PAN Card बनवाएँ</h2>
+
+    <p>
+        नीचे अपनी जानकारी भरें।
+    </p>
+
+    <div class="form-card">
+
+        <label>👤 पूरा नाम</label>
+
+        <input
+            type="text"
+            id="pan-name"
+            placeholder="अपना पूरा नाम लिखें"
+        >
+
+
+        <label>📱 मोबाइल नंबर</label>
+
+        <input
+            type="tel"
+            id="pan-phone"
+            placeholder="10 अंकों का मोबाइल नंबर"
+            maxlength="10"
+        >
+
+
+        <label>🏠 पूरा पता</label>
+
+        <textarea
+            id="pan-address"
+            placeholder="गाँव, पोस्ट, थाना, जिला आदि पूरा पता"
+            rows="4"
+        ></textarea>
+
+
+        <label>📝 PAN Card का काम</label>
+
+        <select id="pan-type">
+
+            <option value="New PAN">
+                नया PAN Card
+            </option>
+
+            <option value="Correction">
+                PAN Card Correction
+            </option>
+
+        </select>
+
+
+        <label>📌 अतिरिक्त जानकारी (Optional)</label>
+
+        <textarea
+            id="pan-note"
+            placeholder="अगर कोई विशेष जानकारी है तो लिखें"
+            rows="3"
+        ></textarea>
+
+
+        <button
+            type="button"
+            onclick="submitPanRequest()"
+        >
+            📤 Request भेजें
+        </button>
+<button
+    type="button"
+    onclick="checkPanStatus()"
+>
+    🔎 PAN Request Status देखें
+</button>
+
+        <button
+            type="button"
+            onclick="closePanRequest()"
+        >
+            ← वापस Service पर
+        </button>
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     SHOP CATEGORY SECTION
+===================================================== -->
+<!-- =====================================================
+     NEED / REQUIREMENT SECTION
+===================================================== -->
+
+<div
+    id="need-section"
+    style="display:none;"
+>
+
+    <h2>
+        📦 अपनी जरूरत बताएं
+    </h2>
+
+    <p>
+        आपको जो सामान या सेवा चाहिए, उसकी जानकारी यहाँ दें।
+    </p>
+
+    <div class="card">
+
+        <span>📝</span>
+
+        <h3>
+            आपकी जरूरत
+        </h3>
+
+        <p>
+            आगे इसका Request Form बनाएँगे।
+        </p>
+
+    </div>
+
+    <button
+        type="button"
+        onclick="closeNeed()"
+    >
+        ← वापस Home
+    </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     URGENT ORDER SECTION
+===================================================== -->
+
+<div
+    id="urgent-section"
+    style="display:none;"
+>
+
+    <h2>
+        ⚡ Urgent Order
+    </h2>
+
+    <p>
+        जरूरी सामान जल्दी मंगाने के लिए यहाँ से request करें।
+    </p>
+
+    <div class="card">
+
+        <span>⚡</span>
+
+        <h3>
+            Urgent Request
+        </h3>
+
+        <p>
+            आगे इसका Urgent Order Form बनाएँगे।
+        </p>
+
+    </div>
+
+    <button
+        type="button"
+        onclick="closeUrgent()"
+    >
+        ← वापस Home
+    </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     FESTIVAL BOOKING SECTION
+===================================================== -->
+
+<div
+    id="festival-section"
+    style="display:none;"
+>
+
+    <h2>
+        🎉 Festival Booking
+    </h2>
+
+    <p>
+        त्योहार के सामान की पहले से booking करें।
+    </p>
+
+    <div class="card">
+
+        <span>🎉</span>
+
+        <h3>
+            Festival Booking
+        </h3>
+
+        <p>
+            आगे इसमें Festival Booking Form बनाएँगे।
+        </p>
+
+    </div>
+
+    <button
+        type="button"
+        onclick="closeFestival()"
+    >
+        ← वापस Home
+    </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     SUGGESTION SECTION
+===================================================== -->
+
+<div
+    id="suggestion-section"
+    style="display:none;"
+>
+
+    <h2>
+        💡 सुझाव दें
+    </h2>
+
+    <p>
+        गाँव के लिए अपने सुझाव और feedback भेजें।
+    </p>
+
+    <div class="card">
+
+        <span>💡</span>
+
+        <h3>
+            अपना सुझाव
+        </h3>
+
+        <p>
+            आगे इसका Suggestion Form बनाएँगे।
+        </p>
+
+    </div>
+
+    <button
+        type="button"
+        onclick="closeSuggestion()"
+    >
+        ← वापस Home
+    </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     SHOP CATEGORY SECTION
+===================================================== -->
+<div
+    id="shop-section"
+    class="shop-section"
+>
+
+
+    <h2>
+        🛒 सामान मंगाएँ
+    </h2>
+
+
+    <p>
+        आपको क्या सामान चाहिए?
+    </p>
+
+    <div class="shop-grid">
+
+
+        <!-- FRUITS & VEGETABLES -->
+
+        <div
+            class="shop-item"
+            onclick="openVegetables()"
+        >
+
+            🥦
+
+            <h3>
+                फल और सब्जी
+            </h3>
+
+        </div>
+
+
+
+        <!-- PUJA -->
+
+        <div class="shop-item">
+
+            🪔
+
+            <h3>
+                पूजा सामान
+            </h3>
+
+        </div>
+
+
+
+        <!-- STATIONERY -->
+
+        <div class="shop-item">
+
+            📚
+
+            <h3>
+                स्टेशनरी
+            </h3>
+
+        </div>
+
+
+
+        <!-- HOUSEHOLD -->
+
+        <div class="shop-item">
+
+            🏠
+
+            <h3>
+                घर का सामान
+            </h3>
+
+        </div>
+
+
+    </div>
+
+
+
+    <button onclick="closeShop()">
+
+        ← वापस Home
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     VEGETABLE & FRUIT SECTION
+===================================================== -->
+
+<div
+    id="vegetable-section"
+    class="vegetable-section"
+>
+
+
+    <!-- CART BAR -->
+
+    <div class="cart-bar">
+
+    🛒 Cart:
+    <span id="cart-count">0 सामान</span>
+
+    <br>
+
+    ⚖️ कुल वजन:
+    <span id="cart-weight">0 ग्राम</span>
+
+</div>
+
+
+    <!-- CART LIST -->
+
+    <div
+        id="cart-list"
+        class="cart-list"
+    >
+
+    </div>
+
+
+
+    <!-- ORDER BUTTON -->
+
+    <button
+        class="order-btn"
+        onclick="openOrderForm()"
+    >
+
+        🛍️ Order Now
+
+    </button>
+
+
+
+    <h2>
+        🥦 फल और सब्जी
+    </h2>
+
+
+    <p>
+        अपनी जरूरत का सामान चुनें
+    </p>
+
+
+
+    <!-- =================================================
+         PRODUCT GRID
+    ================================================= -->
+
+    <div class="product-grid">
+
+
+        <!-- आलू -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🥔
+            </div>
+
+            <h3>
+                आलू
+            </h3>
+
+            <button
+                onclick="addToCart('आलू')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- टमाटर -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🍅
+            </div>
+
+            <h3>
+                टमाटर
+            </h3>
+
+            <button
+                onclick="addToCart('टमाटर')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- प्याज -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🧅
+            </div>
+
+            <h3>
+                प्याज
+            </h3>
+
+            <button
+                onclick="addToCart('प्याज')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- शिमला मिर्च -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🫑
+            </div>
+
+            <h3>
+                शिमला मिर्च
+            </h3>
+
+            <button
+                onclick="addToCart('शिमला मिर्च')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+        <!-- हरी मिर्च -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🌶️
+            </div>
+
+            <h3>
+                हरी मिर्च
+            </h3>
+
+            <button
+                onclick="addToCart('हरी मिर्च')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- बैंगन -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🍆
+            </div>
+
+            <h3>
+                बैंगन
+            </h3>
+
+            <button
+                onclick="addToCart('बैंगन')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- हरा साग -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🥬
+            </div>
+
+            <h3>
+                हरा साग
+            </h3>
+
+            <button
+                onclick="addToCart('हरा साग')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+        <!-- खीरा -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🥒
+            </div>
+
+            <h3>
+                खीरा
+            </h3>
+
+            <button
+                onclick="addToCart('खीरा')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- केला -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🍌
+            </div>
+
+            <h3>
+                केला
+            </h3>
+
+            <button
+                onclick="addToCart('केला')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- सेब -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🍎
+            </div>
+
+            <h3>
+                सेब
+            </h3>
+
+            <button
+                onclick="addToCart('सेब')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- अंगूर -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🍇
+            </div>
+
+            <h3>
+                अंगूर
+            </h3>
+
+            <button
+                onclick="addToCart('अंगूर')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- अनार -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                ❤️
+            </div>
+
+            <h3>
+                अनार
+            </h3>
+
+            <button
+                onclick="addToCart('अनार')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- अनानास -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🍍
+            </div>
+
+            <h3>
+                अनानास
+            </h3>
+
+            <button
+                onclick="addToCart('अनानास')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- आम -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🥭
+            </div>
+
+            <h3>
+                आम
+            </h3>
+
+            <button
+                onclick="addToCart('आम')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- संतरा -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🍊
+            </div>
+
+            <h3>
+                संतरा
+            </h3>
+
+            <button
+                onclick="addToCart('संतरा')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- तरबूज -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🍉
+            </div>
+
+            <h3>
+                तरबूज
+            </h3>
+
+            <button
+                onclick="addToCart('तरबूज')"
+            >
+                ➕ Add
+            </button>
+
+        </div>
+
+
+
+        <!-- OTHER VEGETABLE -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🥦
+            </div>
+
+            <h3>
+                अन्य सब्जियां
+            </h3>
+
+            <input
+                type="text"
+                id="other-vegetable"
+                placeholder="कौन-सी सब्जी चाहिए?"
+            >
+
+            <button
+                onclick="requestOtherVegetable()"
+            >
+                📩 Request
+            </button>
+
+        </div>
+
+
+
+        <!-- OTHER FRUIT -->
+
+        <div class="product">
+
+            <div class="product-icon">
+                🍓
+            </div>
+
+            <h3>
+                अन्य फल
+            </h3>
+
+            <input
+                type="text"
+                id="other-fruit"
+                placeholder="कौन-सा फल चाहिए?"
+            >
+
+            <button
+                onclick="requestOtherFruit()"
+            >
+                📩 Request
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+
+    <button onclick="backToShop()">
+
+        ← वापस Categories
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     ORDER FORM
+===================================================== -->
+
+<div
+    id="order-section"
+    class="order-section"
+>
+
+
+    <h2>
+        📦 आपका Order
+    </h2>
+
+
+    <p>
+        Delivery के लिए अपनी जानकारी भरें
+    </p>
+
+
+
+    <!-- NAME -->
+
+    <input
+        type="text"
+        id="customer-name"
+        placeholder="👤 आपका नाम"
+    >
+
+
+
+    <!-- PHONE -->
+
+    <input
+        type="tel"
+        id="customer-phone"
+        placeholder="📱 मोबाइल नंबर"
+        maxlength="10"
+    >
+
+
+
+    <!-- ADDRESS -->
+
+    <textarea
+        id="customer-address"
+        placeholder="🏠 गाँव / पूरा पता"
+        rows="4"
+    ></textarea>
+
+
+
+    <!-- NOTE -->
+
+    <textarea
+        id="customer-note"
+        placeholder="📝 कोई खास जानकारी? (Optional)"
+        rows="3"
+    ></textarea>
+
+
+
+    <!-- CONFIRM -->
+
+    <button
+        class="confirm-btn"
+        onclick="confirmOrder()"
+    >
+
+        ✅ Order Confirm करें
+
+    </button>
+
+
+
+    <!-- BACK -->
+
+    <button
+        onclick="backToVegetables()"
+    >
+
+        ← वापस Shopping
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     SUCCESS / CONFIRMATION SECTION
+===================================================== -->
+
+<div
+    id="success-section"
+    class="success-section"
+>
+
+
+    <div class="success-icon">
+
+        ✅
+
+    </div>
+
+
+
+    <h2>
+        Order Successfully Placed!
+    </h2>
+
+
+
+    <p>
+        आपका सामान का Order हमें मिल गया है।
+    </p>
+
+
+
+    <!-- ORDER SUMMARY -->
+
+    <div class="order-summary">
+
+
+        <h3>
+            📦 Order Details
+        </h3>
+
+
+
+        <!-- ORDER ID -->
+
+        <p>
+
+            <strong>
+                Order ID:
+            </strong>
+
+            <span id="order-id">
+            </span>
+
+        </p>
+
+
+
+        <!-- SUCCESS ITEMS -->
+
+        <div id="success-items">
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- HOME BUTTON -->
+
+    <button
+        class="home-btn"
+        onclick="goToHome()"
+    >
+
+        🏠 वापस Home
+
+    </button>
+
+
+</div>
+<!-- My Orders Section -->
+<div id="orders-section" class="orders-section">
+
+    <h2>📦 My Orders</h2>
+
+    <p>आपके सभी Orders यहाँ दिखाई देंगे।</p>
+
+    <div id="orders-list"></div>
+    <h3>🪪 My Service Requests</h3>
+
+ <div id="service-requests-list"></div>
+
+    <button onclick="goToHome()">
+        🏠 वापस Home
+    </button>
+
+</div>
+
+
+<!-- =====================================================
+     BOTTOM NAVIGATION
+===================================================== -->
+
+<div class="bottom-nav">
+
+
+    <div class="nav-item active">
+
+        🏠
+
+        <span>
+            Home
+        </span>
+
+    </div>
+
+    <div class="nav-item" onclick="openMyOrders()">
+    📦
+    <span>Orders</span>
+</div>
+
+    <div class="nav-item">
+
+        💡
+
+        <span>
+            Suggestions
+        </span>
+
+    </div>
+
+    <div class="nav-item">
+
+        👤
+
+        <span>
+            Profile
+        </span>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+/* =====================================================
+   CART DATA
+===================================================== */
+
+let cartItems = [];
+
+
+
+/* =====================================================
+   HOME → SHOP
+===================================================== */
+/* =====================================================
+   SERVICE SECTION
+===================================================== */
+
+function openService() {
+
+    document.getElementById("home-section").style.display = "none";
+
+    document.getElementById("shop-section").style.display = "none";
+
+    document.getElementById("vegetable-section").style.display = "none";
+
+    document.getElementById("order-section").style.display = "none";
+
+    document.getElementById("success-section").style.display = "none";
+
+    document.getElementById("orders-section").style.display = "none";
+
+    document.getElementById("service-section").style.display = "block";
+
+    window.scrollTo(0, 0);
+}
+
+
+function closeService() {
+
+    document.getElementById("service-section").style.display = "none";
+
+    document.getElementById("home-section").style.display = "block";
+
+    window.scrollTo(0, 0);
+}
+
+
+function selectService(serviceName) {
+
+    // =========================================
+    // PAN CARD — Existing Working System
+    // =========================================
+
+    if (serviceName === "PAN Card बनवाना") {
+
+        document.getElementById("home-section").style.display = "none";
+        document.getElementById("service-section").style.display = "none";
+        document.getElementById("service-request-section").style.display = "none";
+
+        document.getElementById("pan-request-section").style.display = "block";
+
+        window.scrollTo(0, 0);
+
+        return;
+    }
+
+
+    // =========================================
+    // OTHER SERVICES — Common Request Form
+    // =========================================
+
+    document.getElementById("home-section").style.display = "none";
+    document.getElementById("service-section").style.display = "none";
+    document.getElementById("pan-request-section").style.display = "none";
+
+    document.getElementById("service-request-section").style.display = "block";
+
+
+    // Service name दिखाएँ
+
+    document.getElementById("service-request-title").innerText =
+        "🔧 " + serviceName + " Request";
+
+
+    document.getElementById("service-request-type").value =
+        serviceName;
+
+
+    window.scrollTo(0, 0);
+}
+async function submitPanRequest() {
+    // =====================================================
+// SUBMIT COMMON SERVICE REQUEST
+// =====================================================
+
+async function submitServiceRequest() {
+
+    const name =
+        document.getElementById("service-customer-name")
+        .value
+        .trim();
+
+    const phone =
+        document.getElementById("service-customer-phone")
+        .value
+        .trim();
+
+    const address =
+        document.getElementById("service-customer-address")
+        .value
+        .trim();
+
+    const serviceType =
+        document.getElementById("service-request-type")
+        .value
+        .trim();
+
+    const note =
+        document.getElementById("service-customer-note")
+        .value
+        .trim();
+
+
+    // =========================================
+    // VALIDATION
+    // =========================================
+
+    if (name === "") {
+        alert("कृपया अपना नाम लिखें।");
+        return;
+    }
+
+    if (!/^[0-9]{10}$/.test(phone)) {
+        alert("कृपया सही 10 अंकों का मोबाइल नंबर डालें।");
+        return;
+    }
+
+    if (address === "") {
+        alert("कृपया अपना पूरा पता लिखें।");
+        return;
+    }
+
+    if (serviceType === "") {
+        alert("Service select नहीं हुई है।");
+        return;
+    }
+
+
+    // =========================================
+    // SUPABASE CHECK
+    // =========================================
+
+    if (typeof supabaseClient === "undefined") {
+
+        alert(
+            "❌ Supabase connection नहीं मिला।"
+        );
+
+        return;
+    }
+
+
+    // =========================================
+    // SAVE REQUEST
+    // =========================================
+
+    const { data, error } =
+        await supabaseClient
+            .from("service_requests")
+            .insert([
+                {
+                    service_name: serviceType,
+                    customer_name: name,
+                    phone: phone,
+                    address: address,
+                    service_type: serviceType,
+                    note: note,
+                    status: "Pending"
+                }
+            ])
+            .select();
+
+
+    // =========================================
+    // ERROR
+    // =========================================
+
+    if (error) {
+
+        console.error(
+            "Service Request Error:",
+            error
+        );
+
+        alert(
+            "❌ Request भेजने में समस्या हुई:\n\n" +
+            error.message
+        );
+
+        return;
+    }
+
+
+    // =========================================
+    // SUCCESS
+    // =========================================
+
+    alert(
+        "✅ Service Request सफलतापूर्वक भेज दी गई!\n\n" +
+        "Service: " + serviceType +
+        "\nनाम: " + name +
+        "\nमोबाइल: " + phone +
+        "\n\nStatus: 🟡 Pending"
+    );
+
+
+    // =========================================
+    // FORM CLEAR
+    // =========================================
+
+    document.getElementById("service-customer-name").value = "";
+    document.getElementById("service-customer-phone").value = "";
+    document.getElementById("service-customer-address").value = "";
+    document.getElementById("service-customer-note").value = "";
+
+}
+window.checkPanStatus = async function() {
+
+    const phone = prompt("📱 अपना 10 अंकों का मोबाइल नंबर डालें:");
+
+    if (!phone) {
+        return;
+    }
+
+    if (!/^[0-9]{10}$/.test(phone)) {
+        alert("❌ कृपया सही 10 अंकों का मोबाइल नंबर डालें।");
+        return;
+    }
+
+    if (typeof supabaseClient === "undefined") {
+        alert("❌ Supabase connection नहीं मिला।");
+        return;
+    }
+
+    const { data, error } = await supabaseClient
+        .from("service_requests")
+        .select("customer_name, phone, service_type, status, created_at")
+        .eq("service_name", "PAN Card बनवाना")
+        .eq("phone", phone)
+        .order("created_at", { ascending: false })
+        .limit(1);
+
+    if (error) {
+
+        console.error("PAN Status Error:", error);
+
+        alert(
+            "❌ Status check करने में समस्या हुई:\n\n" +
+            error.message
+        );
+
+        return;
+    }
+
+    if (!data || data.length === 0) {
+
+        alert(
+            "❌ इस मोबाइल नंबर से कोई PAN Request नहीं मिली।"
+        );
+
+        return;
+    }
+
+    const request = data[0];
+
+    let statusText = request.status;
+
+    if (request.status === "Pending") {
+        statusText = "🟡 Pending — Request मिली है";
+    }
+
+    if (request.status === "Processing") {
+        statusText = "🔵 Processing — आपका काम चल रहा है";
+    }
+
+    if (request.status === "Completed") {
+        statusText = "🟢 Completed — आपका काम पूरा हो गया है";
+    }
+
+    if (request.status === "Cancelled") {
+        statusText = "🔴 Cancelled — Request रद्द कर दी गई है";
+    }
+
+    alert(
+        "🪪 PAN Request Status\n\n" +
+        "नाम: " + request.customer_name +
+        "\nकाम: " + request.service_type +
+        "\n\nStatus:\n" + statusText
+    );
+};
+
+console.log("PAN request function Supabase code तक पहुँच गया");
+
+    const name = document.getElementById("pan-name").value.trim();
+    const phone = document.getElementById("pan-phone").value.trim();
+    const address = document.getElementById("pan-address").value.trim();
+    const panType = document.getElementById("pan-type").value;
+    const note = document.getElementById("pan-note").value.trim();
+
+    if (name === "") {
+        alert("कृपया अपना नाम लिखें।");
+        return;
+    }
+
+    if (!/^[0-9]{10}$/.test(phone)) {
+        alert("कृपया सही 10 अंकों का मोबाइल नंबर डालें।");
+        return;
+    }
+
+    if (address === "") {
+        alert("कृपया अपना पूरा पता लिखें।");
+        return;
+    }
+if (typeof supabaseClient === "undefined") {
+    alert("❌ supabaseClient नहीं मिला। Supabase connection की समस्या है।");
+    return;
+}
+
+    const { data, error } = await supabaseClient
+    .from("service_requests")
+        .insert([
+            {
+                service_name: "PAN Card बनवाना",
+                customer_name: name,
+                phone: phone,
+                address: address,
+                service_type: panType,
+                note: note,
+                status: "Pending"
+            }
+        ])
+        .select();
+
+    if (error) {
+    console.error("PAN Request Error:", error);
+
+    alert(
+        "❌ Supabase Error:\n\n" +
+        error.message
+    );
+
+    return;
+}
+    alert(
+        "✅ PAN Card की Request सफलतापूर्वक भेज दी गई!\n\n" +
+        "नाम: " + name +
+        "\nमोबाइल: " + phone
+    );
+
+    document.getElementById("pan-name").value = "";
+    document.getElementById("pan-phone").value = "";
+    document.getElementById("pan-address").value = "";
+    document.getElementById("pan-type").value = "New PAN";
+    document.getElementById("pan-note").value = "";
+}
+function openShop() {
+
+    document.getElementById("home-section").style.display = "none";
+
+    document.getElementById("shop-section").style.display = "block";
+
+    document.getElementById("vegetable-section").style.display = "none";
+
+    document.getElementById("order-section").style.display = "none";
+
+    document.getElementById("success-section").style.display = "none";
+
+    window.scrollTo(0, 0);
+
+}
+
+
+/* =====================================================
+   SHOP → HOME
+===================================================== */
+
+function closeShop() {
+
+    document.getElementById("shop-section").style.display = "none";
+
+    document.getElementById("home-section").style.display = "block";
+
+    document.getElementById("vegetable-section").style.display = "none";
+
+    document.getElementById("order-section").style.display = "none";
+
+    document.getElementById("success-section").style.display = "none";
+
+    window.scrollTo(0, 0);
+
+}
+
+
+/* =====================================================
+   SHOP → VEGETABLE
+===================================================== */
+
+function openVegetables() {
+
+    document.getElementById("home-section").style.display = "none";
+
+    document.getElementById("shop-section").style.display = "none";
+
+    document.getElementById("vegetable-section").style.display = "block";
+
+    document.getElementById("order-section").style.display = "none";
+
+    document.getElementById("success-section").style.display = "none";
+
+    window.scrollTo(0, 0);
+
+}
+
+
+
+/* =====================================================
+   VEGETABLE → SHOP
+===================================================== */
+
+function backToShop() {
+
+    document.getElementById("vegetable-section").style.display = "none";
+
+    document.getElementById("shop-section").style.display = "block";
+
+    window.scrollTo(0, 0);
+
+}
+
+
+
+/* =====================================================
+   ADD TO CART — 250 GRAM STEP
+===================================================== */
+
+function addToCart(productName) {
+
+    let existingItem = cartItems.find(
+        function(item) {
+            return item.name === productName;
+        }
+    );
+
+    /* अगर item पहले से है */
+    if (existingItem) {
+
+        existingItem.quantity =
+            Number((existingItem.quantity + 0.25).toFixed(2));
+
+    }
+
+    /* अगर नया item है */
+    else {
+
+        cartItems.push({
+
+            name: productName,
+
+            /* 250 ग्राम = 0.25 KG */
+            quantity: 0.25
+
+        });
+
+    }
+
+    updateCart();
+}
+
+
+/* =====================================================
+   UPDATE CART
+===================================================== */
+
+function updateCart() {
+
+    /* Cart में कुल product quantity नहीं,
+       total weight/quantity calculate होगा */
+
+    let totalWeight = 0;
+
+    cartItems.forEach(
+        function(item) {
+
+            totalWeight += Number(item.quantity);
+
+        }
+    );
+
+    totalWeight = Number(totalWeight.toFixed(2));
+
+
+    /* Cart count */
+
+document.getElementById("cart-count").innerText =
+    cartItems.length + " सामान";
+    document.getElementById("cart-weight").innerText =
+    formatWeight(totalWeight);
+
+    /* Cart list */
+
+    let cartList =
+        document.getElementById("cart-list");
+
+    cartList.innerHTML = "";
+
+
+    /* अगर cart खाली है */
+
+    if (cartItems.length === 0) {
+
+        cartList.innerHTML = "";
+
+        return;
+
+    }
+
+
+    /* हर item दिखाएँ */
+
+    cartItems.forEach(
+        function(item, index) {
+
+            cartList.innerHTML += `
+
+                <div class="cart-item">
+
+                    <strong>
+                        🛒 ${item.name}
+                    </strong>
+
+                    <div class="quantity-controls">
+
+                        <button
+                            type="button"
+                            onclick="decreaseQuantity(${index})"
+                        >
+                            −
+                        </button>
+
+                        <span>
+                            ${formatWeight(item.quantity)}
+                        </span>
+
+                        <button
+                            type="button"
+                            onclick="increaseQuantity(${index})"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   WEIGHT FORMAT
+===================================================== */
+
+function formatWeight(kg) {
+
+    kg = Number(kg);
+
+    if (kg < 1) {
+
+        return Math.round(kg * 1000) + " ग्राम";
+
+    }
+
+    if (kg % 1 === 0) {
+
+        return kg + " किलो";
+
+    }
+
+    return kg.toFixed(2) + " किलो";
+
+}
+
+/* =====================================================
+   PLUS QUANTITY — 250 GRAM
+===================================================== */
+
+function increaseQuantity(index) {
+
+    if (!cartItems[index]) {
+
+        return;
+
+    }
+
+    /* हर + पर 250 ग्राम बढ़ेगा */
+    cartItems[index].quantity =
+        Number((cartItems[index].quantity + 0.25).toFixed(2));
+
+    updateCart();
+
+}
+/* =====================================================
+   MINUS QUANTITY — 250 GRAM
+===================================================== */
+
+function decreaseQuantity(index) {
+
+    if (!cartItems[index]) {
+
+        return;
+
+    }
+
+    /* हर - पर 250 ग्राम कम होगा */
+    cartItems[index].quantity =
+        Number((cartItems[index].quantity - 0.25).toFixed(2));
+
+
+    /* Quantity 0 होने पर item हटाएँ */
+
+    if (cartItems[index].quantity <= 0) {
+
+        cartItems.splice(index, 1);
+
+    }
+
+    updateCart();
+
+}
+/* =====================================================
+   OTHER VEGETABLE
+===================================================== */
+
+function requestOtherVegetable() {
+
+
+    let item =
+        document
+        .getElementById("other-vegetable")
+        .value
+        .trim();
+
+
+
+    if (item === "") {
+
+        alert(
+            "कृपया सब्जी का नाम लिखें।"
+        );
+
+        return;
+
+    }
+
+
+
+    addToCart(item);
+
+
+
+    document
+        .getElementById("other-vegetable")
+        .value = "";
+
+}
+
+
+/* =====================================================
+   OTHER FRUIT
+===================================================== */
+
+function requestOtherFruit() {
+
+
+    let item =
+        document
+        .getElementById("other-fruit")
+        .value
+        .trim();
+
+
+
+    if (item === "") {
+
+        alert(
+            "कृपया फल का नाम लिखें।"
+        );
+
+        return;
+
+    }
+
+    addToCart(item);
+    document
+        .getElementById("other-fruit")
+        .value = "";
+
+}
+
+/* =====================================================
+   OPEN ORDER FORM
+===================================================== */
+
+function openOrderForm() {
+
+
+    /* Cart खाली है */
+
+    if (cartItems.length === 0) {
+
+        alert(
+            "पहले कम से कम एक सामान Cart में जोड़ें।"
+        );
+
+        return;
+
+    }
+
+    /* Vegetable section hide */
+
+    document.getElementById("vegetable-section").style.display =
+        "none";
+
+
+
+    /* Order section show */
+
+    document.getElementById("order-section").style.display =
+        "block";
+
+
+
+    /* बाकी hide */
+
+    document.getElementById("success-section").style.display =
+        "none";
+
+
+
+    window.scrollTo(0, 0);
+
+}
+
+
+/* =====================================================
+   ORDER → SHOPPING
+===================================================== */
+
+function backToVegetables() {
+
+
+    document.getElementById("order-section").style.display =
+        "none";
+
+
+    document.getElementById("vegetable-section").style.display =
+        "block";
+
+
+    window.scrollTo(0, 0);
+
+}
+
+/* =====================================================
+   CONFIRM ORDER
+===================================================== */
+// =========================
+// SAVE ORDER
+// =========================
+
+function saveOrder(orderData) {
+
+    let orders =
+        JSON.parse(localStorage.getItem("sahilSuvidhaOrders")) || [];
+
+    orders.unshift(orderData);
+
+    localStorage.setItem(
+        "sahilSuvidhaOrders",
+        JSON.stringify(orders)
+    );
+}
+
+
+// =========================
+// OPEN MY ORDERS
+// =========================
+
+function openMyOrders() {
+
+    document.getElementById("home-section").style.display = "none";
+    document.getElementById("shop-section").style.display = "none";
+    document.getElementById("vegetable-section").style.display = "none";
+    document.getElementById("order-section").style.display = "none";
+    document.getElementById("success-section").style.display = "none";
+
+    document.getElementById("orders-section").style.display = "block";
+
+    showMyOrders();
+
+    window.scrollTo(0, 0);
+}
+// =========================
+// SHOW MY ORDERS
+// =========================
+
+async function showMyOrders() {
+
+    let orders =
+        JSON.parse(localStorage.getItem("sahilSuvidhaOrders")) || [];
+
+    let ordersList =
+        document.getElementById("orders-list");
+
+    ordersList.innerHTML = "";
+
+    if (orders.length === 0) {
+
+        ordersList.innerHTML = `
+            <div class="empty-orders">
+
+                <div style="font-size:45px;">
+                    📦
+                </div>
+
+                <h3>अभी कोई Order नहीं है</h3>
+
+                <p>
+                    जब आप सामान Order करेंगे,
+                    यहाँ दिखाई देगा।
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    // =========================================
+    // हर Order का Latest Status Supabase से लें
+    // =========================================
+
+    for (const order of orders) {
+
+        try {
+
+            const { data, error } =
+                await supabaseClient.rpc(
+                    "get_my_order_status",
+                    {
+                        p_order_id: order.orderId,
+                        p_phone: order.phone
+                    }
+                );
+
+
+            if (!error && data && data.length > 0) {
+
+                // Supabase का latest status
+                order.status = data[0].status;
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Order status fetch error:",
+                error
+            );
+
+        }
+
+
+        // =========================================
+        // Order Items
+        // =========================================
+
+        let itemsHTML = "";
+
+        if (Array.isArray(order.items)) {
+
+            order.items.forEach(function(item) {
+
+                itemsHTML += `
+       <div class="order-item">
+        🛒 ${item.name} — ${formatWeight(item.quantity)}
+     </div>
+         `;
+            });
+
+         }
+
+
+        // =========================================
+        // Order Card
+        // =========================================
+
+        ordersList.innerHTML += `
+
+            <div class="order-card">
+
+                <div class="order-top">
+
+                    <strong>
+                        📦 ${order.orderId}
+                    </strong>
+
+                    <span class="order-status status-${(order.status || "Pending").toLowerCase()}">
+                  ${order.status || "Pending"}
+                 </span>
+
+                 </div>
+
+                 <hr>
+
+                 <p>
+                    <strong>👤 नाम:</strong>
+                    ${order.name}
+                 </p>
+
+                 <p>
+                    <strong>📱 मोबाइल:</strong>
+                    ${order.phone}
+                </p>
+
+                <p>
+                    <strong>📍 पता:</strong>
+                    ${order.address}
+                </p>
+
+                <h4>🛒 सामान</h4>
+
+                ${itemsHTML}
+
+                <p>
+                    <strong>⚖️ कुल वजन:</strong> ${formatWeight(order.totalItems)}
+                </p>
+
+                <p>
+                    <strong>📝 Note:</strong>
+                    ${order.note || "कोई Note नहीं"}
+                </p>
+
+                <p>
+                    <strong>🕒 Order Time:</strong>
+                    ${order.date || ""}
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    // =========================================
+    // Latest Status LocalStorage में भी Save
+    // =========================================
+
+    localStorage.setItem(
+        "sahilSuvidhaOrders",
+        JSON.stringify(orders)
+    );
+// =========================================
+// PAN / SERVICE REQUESTS
+// =========================================
+
+const serviceRequestsList =
+    document.getElementById("service-requests-list");
+
+if (serviceRequestsList) {
+
+    serviceRequestsList.innerHTML =
+        "<p>⏳ Service Requests loading...</p>";
+
+    const { data: serviceRequests, error: serviceError } =
+        await supabaseClient
+            .from("service_requests")
+            .select("*")
+            .eq("service_name", "PAN Card बनवाना")
+            .order("created_at", { ascending: false });
+
+    if (serviceError) {
+
+        console.error(
+            "Service Request Error:",
+            serviceError
+        );
+
+        serviceRequestsList.innerHTML =
+            "<p>❌ Service Requests load नहीं हो सकीं।</p>";
+
+    } else if (
+        !serviceRequests ||
+        serviceRequests.length === 0
+    ) {
+
+        serviceRequestsList.innerHTML = `
+            <div class="empty-orders">
+
+                <div style="font-size:45px;">
+                    🪪
+                </div>
+
+                <h3>अभी कोई Service Request नहीं है</h3>
+
+                <p>
+                    जब आप कोई Service Request भेजेंगे,
+                    यहाँ दिखाई देगी।
+                </p>
+
+            </div>
+        `;
+
+    } else {
+
+        serviceRequestsList.innerHTML = "";
+
+        serviceRequests.forEach(function(request) {
+
+            let statusClass =
+                (request.status || "Pending")
+                .toLowerCase();
+
+            let statusText =
+                request.status || "Pending";
+
+            serviceRequestsList.innerHTML += `
+
+                <div class="order-card">
+
+                    <div class="order-top">
+
+                        <strong>
+                            🪪 PAN Card Request #${request.id}
+                        </strong>
+
+                        <span class="order-status status-${statusClass}">
+                            ${statusText}
+                        </span>
+
+                    </div>
+
+                    <hr>
+
+                    <p>
+                        <strong>👤 नाम:</strong>
+                        ${request.customer_name}
+                    </p>
+
+                    <p>
+                        <strong>📱 मोबाइल:</strong>
+                        ${request.phone}
+                    </p>
+
+                    <p>
+                        <strong>🪪 काम:</strong>
+                        ${request.service_type || "PAN Card"}
+                    </p>
+
+                    <p>
+                        <strong>📝 Note:</strong>
+                        ${request.note || "कोई Note नहीं"}
+                    </p>
+
+                    <p>
+                        <strong>🕒 Request Time:</strong>
+                        ${new Date(request.created_at).toLocaleString("hi-IN")}
+                    </p>
+
+                </div>
+
+            `;
+
+        });
+
+    }
+
+}
+}
+async function confirmOrder() {
+
+
+    /* Customer information */
+
+    let name =
+        document
+        .getElementById("customer-name")
+        .value
+        .trim();
+    let phone =
+        document
+        .getElementById("customer-phone")
+        .value
+        .trim();
+
+    let address =
+        document
+        .getElementById("customer-address")
+        .value
+        .trim();
+
+    let note =
+        document
+        .getElementById("customer-note")
+        .value
+        .trim();
+
+    /* =================================================
+       NAME VALIDATION
+    ================================================= */
+
+    if (name === "") {
+
+        alert(
+            "कृपया अपना नाम लिखें।"
+        );
+
+        return;
+
+    }
+
+
+
+    /* =================================================
+       PHONE VALIDATION
+    ================================================= */
+
+    if (!/^[0-9]{10}$/.test(phone)) {
+
+        alert(
+            "कृपया सही 10 अंकों का मोबाइल नंबर डालें।"
+        );
+
+        return;
+
+    }
+
+    /* =================================================
+       ADDRESS VALIDATION
+    ================================================= */
+
+    if (address === "") {
+
+        alert(
+            "कृपया अपना पता लिखें।"
+        );
+
+        return;
+
+    }
+
+
+
+    /* =================================================
+       CART VALIDATION
+    ================================================= */
+
+    if (cartItems.length === 0) {
+
+        alert(
+            "आपका Cart खाली है।"
+        );
+
+        return;
+
+    }
+
+
+    /* =================================================
+       ORDER ID
+    ================================================= */
+
+    let orderId =
+        "SS" +
+        Date.now()
+        .toString()
+        .slice(-6);
+let totalItems = 0;
+
+cartItems.forEach(function(item) {
+    totalItems += item.quantity;
+});
+
+let savedItems = cartItems.map(function(item) {
+    return {
+        name: item.name,
+        quantity: item.quantity
+    };
+});
+
+let orderData = {
+
+    orderId: orderId,
+
+    name: name,
+
+    phone: phone,
+
+    address: address,
+
+    note: note,
+
+    items: savedItems,
+
+    totalItems: totalItems,
+
+    status: "Pending",
+
+    date: new Date().toLocaleString("en-IN")
+
+};
+
+saveOrder(orderData);
+// Send Order to Supabase
+const { data, error } = await supabaseClient
+    .from("orders")
+    .insert([
+        {
+            order_id: orderId,
+            customer_name: name,
+            phone: phone,
+            address: address,
+            note: note,
+            items: savedItems,
+            total_items: totalItems,
+            status: "Pending"
+        }
+    ]);
+
+if (error) {
+    console.error("Supabase Order Error:", error);
+
+    alert(
+        "Order online save नहीं हो पाया। कृपया दोबारा कोशिश करें।"
+    );
+
+    return;
+}
+    document
+        .getElementById("order-id")
+        .innerText = orderId;
+
+    /* =================================================
+       SUCCESS DETAILS
+    ================================================= */
+
+    let successItems =
+        document.getElementById("success-items");
+
+
+
+    successItems.innerHTML = `
+
+        <p>
+
+            👤
+
+            <strong>
+                नाम:
+            </strong>
+
+            ${name}
+
+        </p>
+
+        <p>
+
+            📱
+
+            <strong>
+                मोबाइल:
+            </strong>
+
+            ${phone}
+
+        </p>
+
+
+        <p>
+
+            🏠
+
+            <strong>
+                पता:
+            </strong>
+
+            ${address}
+
+        </p>
+
+    `;
+
+
+
+    /* =================================================
+       OPTIONAL NOTE
+    ================================================= */
+
+    if (note !== "") {
+
+
+        successItems.innerHTML += `
+
+            <p>
+
+                📝
+
+                <strong>
+                    Note:
+                </strong>
+
+                ${note}
+
+            </p>
+
+        `;
+
+    }
+
+
+
+    /* Divider */
+
+    successItems.innerHTML += `
+
+        <hr>
+
+        <h4>
+            🛒 सामान
+        </h4>
+
+    `;
+
+
+
+    /* =================================================
+       ORDER ITEMS
+    ================================================= */
+
+    cartItems.forEach(
+        function(item) {
+
+
+            successItems.innerHTML += `
+
+                <p>
+
+                    ${item.name}
+
+                    ×
+
+                    ${item.quantity}
+
+                </p>
+
+            `;
+
+        }
+    );
+
+
+
+    /* =================================================
+       ORDER FORM HIDE
+    ================================================= */
+
+    document
+        .getElementById("order-section")
+        .style.display = "none";
+
+
+
+    /* =================================================
+       SUCCESS PAGE SHOW
+    ================================================= */
+
+    document
+        .getElementById("success-section")
+        .style.display = "block";
+
+
+
+    window.scrollTo(0, 0);
+
+}
+
+/* =====================================================
+   SUCCESS → HOME
+===================================================== */
+
+function goToHome() {
+
+
+    /* Hide success */
+
+    document
+        .getElementById("success-section")
+        .style.display = "none";
+
+
+
+    /* Hide order */
+
+    document
+        .getElementById("order-section")
+        .style.display = "none";
+
+
+
+    /* Hide vegetables */
+
+    document
+        .getElementById("vegetable-section")
+        .style.display = "none";
+
+
+
+    /* Hide shop */
+
+    document
+        .getElementById("shop-section")
+        .style.display = "none";
+
+
+
+    /* Show home */
+
+    document
+        .getElementById("home-section")
+        .style.display = "block";
+
+
+
+    /* =================================================
+       CLEAR FORM
+    ================================================= */
+
+    document.getElementById("customer-name").value = "";
+
+    document.getElementById("customer-phone").value = "";
+
+    document.getElementById("customer-address").value = "";
+
+    document.getElementById("customer-note").value = "";
+
+
+
+    /* =================================================
+       CLEAR CART
+    ================================================= */
+
+    cartItems = [];
+
+    updateCart();
+
+    window.scrollTo(0, 0);
+}
+/* =========================================
+   PAGE STARTUP - SHOW ONLY HOME
+========================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const sectionsToHide = [
+        "shop-section",
+        "vegetable-section",
+        "order-section",
+        "success-section",
+        "orders-section"
+    ];
+
+    sectionsToHide.forEach(function (id) {
+
+        const section = document.getElementById(id);
+
+        if (section) {
+            section.style.display = "none";
+        }
+
+    });
+
+    const homeSection =
+        document.getElementById("home-section");
+
+    if (homeSection) {
+        homeSection.style.display = "block";
+    }
+
+});
+</script>
+
+
+</body>
+
+</html>
